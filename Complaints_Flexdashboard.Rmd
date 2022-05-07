@@ -7,15 +7,116 @@ output:
 ---
 
 ```{r setup, include=FALSE}
+
+#Set up and load libraries.
+
 library(flexdashboard)
+library(tidyverse) 
+library(janitor) 
+library(readxl) 
+library(scales)
+library(lubridate)
+library(ggthemes)
+library(ggplot2)
+library(esquisse)
+library(dplyr)
+
+complaints <- readRDS("complaints.rds") %>%
+  clean_names()
+
+complaints %>%
+  count(company, sort = TRUE)
+
+
+#----------------------------------------------
+
+#Begin data analysis and ggplot charting:
+
+# 1) Sort by company.
+
+complaints %>%
+  count(company, sort = TRUE)
+
+top_companies <- complaints %>% 
+  filter(company %in% c("EQUIFAX", "INC.", 
+                        "TRANSUNION INTERMEDIATE HOLDINGS, INC.", 
+                        "Experian Information Solutions Inc.", 
+                        "BANK OF AMERICA, NATIONAL ASSOCIATION", 
+                        "WELLS FARGO & COMPANY", 
+                        "JPMORGAN CHASE & CO.", 
+                        "CITIBANK, N.A.")) %>% 
+  arrange(desc(company))
+
+ggplot(top_companies, aes(company)) +
+  geom_bar(color = "#9ebcda", fill = "#9ebcda") +
+  coord_flip() +
+  scale_y_continuous(name = "Number of Complaints", labels = scales::comma) +
+  scale_x_discrete(name = "Company Name") +
+  labs(title = "Companies With Most Complaints", 
+       subtitle = "Financial Protection Bureau 2022",
+       caption = "Source: Consumer Complaint Database") +
+  theme_fivethirtyeight()
+
+
+# 2) Sort for complaints by type. 
+
+top_method <- ggplot(complaints, aes(submitted_via))
+top_method + geom_bar(color = "#9ebcda", fill = "#9ebcda") +
+  coord_flip() +
+  scale_y_continuous(name = "Frequency", labels = scales::comma) +
+  scale_x_discrete(name = "Method of Contact") +
+  labs(title = "Number of Complaints by Method", 
+       subtitle = "Financial Protection Bureau 2022",
+       caption = "Source: Consumer Complaint Database") +
+  theme_fivethirtyeight()
+
+# 3) Sort by state.
+
+complaints %>%
+  count(state, sort = TRUE)
+
+top_states <- complaints %>% 
+  filter(state %in% c("CA", 
+                      "FL", 
+                      "TX", 
+                      "NY", 
+                      "GA", 
+                      "PA", 
+                      "IL", 
+                      "NJ",
+                      "NC",
+                      "OH")) %>% 
+  arrange(desc(company))
+
+ggplot(top_states, aes(state)) +
+  geom_bar(color = "#9ebcda", fill = "#9ebcda") +
+  scale_y_continuous(name = "Number of Complaints", labels = scales::comma) +
+  scale_x_discrete(name = "State") +
+  labs(title = "States With Most Complaints", 
+       subtitle = "Financial Protection Bureau 2022",
+       caption = "Source: Consumer Complaint Database") +
+  theme_fivethirtyeight()
+
+#Now start pasting into flexdashboard chart chunks and testing html knitting:
+
 ```
 
 Column {data-width=650}
 -----------------------------------------------------------------------
 
-### Chart A
+### Sort by company.
 
 ```{r}
+
+ggplot(top_companies, aes(company)) +
+  geom_bar(color = "#9ebcda", fill = "#9ebcda") +
+  coord_flip() +
+  scale_y_continuous(name = "Number of Complaints", labels = scales::comma) +
+  scale_x_discrete(name = "Company Name") +
+  labs(title = "Companies With Most Complaints", 
+       subtitle = "Financial Protection Bureau 2022",
+       caption = "Source: Consumer Complaint Database") +
+  theme_fivethirtyeight()
 
 ```
 
@@ -26,11 +127,30 @@ Column {data-width=350}
 
 ```{r}
 
+top_method <- ggplot(complaints, aes(submitted_via))
+top_method + geom_bar(color = "#9ebcda", fill = "#9ebcda") +
+  coord_flip() +
+  scale_y_continuous(name = "Frequency", labels = scales::comma) +
+  scale_x_discrete(name = "Method of Contact") +
+  labs(title = "Number of Complaints by Method", 
+       subtitle = "Financial Protection Bureau 2022",
+       caption = "Source: Consumer Complaint Database") +
+  theme_fivethirtyeight()
+
 ```
 
 ### Chart C
 
 ```{r}
+
+ggplot(top_states, aes(state)) +
+  geom_bar(color = "#9ebcda", fill = "#9ebcda") +
+  scale_y_continuous(name = "Number of Complaints", labels = scales::comma) +
+  scale_x_discrete(name = "State") +
+  labs(title = "States With Most Complaints", 
+       subtitle = "Financial Protection Bureau 2022",
+       caption = "Source: Consumer Complaint Database") +
+  theme_fivethirtyeight()
 
 ```
 

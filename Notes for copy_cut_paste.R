@@ -6,7 +6,7 @@ output:
 vertical_layout: fill
 ---
   
-  ```{r setup, include=FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 
 #Libraries and import file.

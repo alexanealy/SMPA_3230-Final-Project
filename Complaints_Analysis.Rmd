@@ -49,6 +49,7 @@ ggplot(top_companies, aes(company)) +
   labs(title = "Companies With Most Complaints", 
        subtitle = "Financial Protection Bureau 2022",
        caption = "Source: Consumer Complaint Database") +
+  scale_x_discrete(labels=c("Wells Fargo", "Transunion", "J.P. Morgan", "Experian", "Citibank", "Bank of America")) +
   theme_fivethirtyeight()
 
 ```

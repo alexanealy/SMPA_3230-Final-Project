@@ -1,0 +1,146 @@
+---
+  title: "Consumer Financial Protection Bureau Complaints 2022"
+output: 
+  flexdashboard::flex_dashboard:
+  orientation: columns
+vertical_layout: fill
+---
+  
+  ```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+#Libraries and import file.
+
+library(tidyverse) 
+library(janitor) 
+library(readxl) 
+library(scales)
+library(lubridate)
+library(ggthemes)
+library(ggplot2)
+library(esquisse)
+library(dplyr)
+
+complaints <- read_csv("complaints.csv") %>%
+  clean_names()
+
+#Sort for complaints by company. 
+
+complaints %>%
+  count(company, sort = TRUE)
+
+
+
+top_companies <- complaints %>% 
+  filter(company %in% c("EQUIFAX", "INC.", 
+                        "TRANSUNION INTERMEDIATE HOLDINGS, INC.", 
+                        "Experian Information Solutions Inc.", 
+                        "BANK OF AMERICA, NATIONAL ASSOCIATION", 
+                        "WELLS FARGO & COMPANY", 
+                        "JPMORGAN CHASE & CO.", 
+                        "CITIBANK, N.A.")) %>% 
+  arrange(desc(company))
+
+ggplot(top_companies, aes(company)) +
+  geom_bar(color = "#9ebcda", fill = "#9ebcda") +
+  coord_flip() +
+  scale_y_continuous(name = "Number of Complaints", labels = scales::comma) +
+  scale_x_discrete(name = "Company Name") +
+  labs(title = "Companies With Most Complaints", 
+       subtitle = "Financial Protection Bureau 2022",
+       caption = "Source: Consumer Complaint Database") +
+  theme_fivethirtyeight()
+
+#Sort for complaints by type. 
+
+top_method <- ggplot(complaints, aes(submitted_via))
+top_method + geom_bar(color = "#9ebcda", fill = "#9ebcda") +
+  coord_flip() +
+  scale_y_continuous(name = "Frequency", labels = scales::comma) +
+  scale_x_discrete(name = "Method of Contact") +
+  labs(title = "Number of Complaints by Method", 
+       subtitle = "Financial Protection Bureau 2022",
+       caption = "Source: Consumer Complaint Database") +
+  theme_fivethirtyeight()
+
+#Sort for complaints by state. 
+
+complaints %>%
+  count(state, sort = TRUE)
+
+
+
+top_states <- complaints %>% 
+  filter(state %in% c("CA", 
+                      "FL", 
+                      "TX", 
+                      "NY", 
+                      "GA", 
+                      "PA", 
+                      "IL", 
+                      "NJ",
+                      "NC",
+                      "OH")) %>% 
+  arrange(desc(company))
+
+ggplot(top_states, aes(state)) +
+  geom_bar(color = "#9ebcda", fill = "#9ebcda") +
+  scale_y_continuous(name = "Number of Complaints", labels = scales::comma) +
+  scale_x_discrete(name = "State") +
+  labs(title = "States With Most Complaints", 
+       subtitle = "Financial Protection Bureau 2022",
+       caption = "Source: Consumer Complaint Database") +
+  theme_fivethirtyeight()
+
+```
+
+## Column {data-width="650"}
+
+### Most complaints by company (top 6).
+
+```{r}
+
+ggplot(top_companies, aes(company)) +
+  geom_bar(color = "#9ebcda", fill = "#9ebcda") +
+  coord_flip() +
+  scale_y_continuous(name = "Number of Complaints", labels = scales::comma) +
+  scale_x_discrete(name = "Company Name") +
+  labs(title = "Companies With Most Complaints", 
+       subtitle = "Financial Protection Bureau 2022",
+       caption = "Source: Consumer Complaint Database") +
+  theme_fivethirtyeight()
+
+```
+
+## Column {data-width="350"}
+
+### Most complaints by state (top 10).
+
+```{r}
+
+ggplot(top_states, aes(state)) +
+  geom_bar(color = "#9ebcda", fill = "#9ebcda") +
+  scale_y_continuous(name = "Number of Complaints", labels = scales::comma) +
+  scale_x_discrete(name = "State") +
+  labs(title = "States With Most Complaints", 
+       subtitle = "Financial Protection Bureau 2022",
+       caption = "Source: Consumer Complaint Database") +
+  theme_fivethirtyeight()
+
+```
+
+### Most complaints by method of complaint.
+
+```{r}
+
+top_method <- ggplot(complaints, aes(submitted_via))
+top_method + geom_bar(color = "#9ebcda", fill = "#9ebcda") +
+  coord_flip() +
+  scale_y_continuous(name = "Frequency", labels = scales::comma) +
+  scale_x_discrete(name = "Method of Contact") +
+  labs(title = "Number of Complaints by Method", 
+       subtitle = "Financial Protection Bureau 2022",
+       caption = "Source: Consumer Complaint Database") +
+  theme_fivethirtyeight()
+
+```

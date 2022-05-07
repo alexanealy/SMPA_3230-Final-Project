@@ -55,6 +55,7 @@ ggplot(top_companies, aes(company)) +
   labs(title = "Companies With Most Complaints", 
        subtitle = "Financial Protection Bureau 2022",
        caption = "Source: Consumer Complaint Database") +
+  scale_x_discrete(labels=c("Wells Fargo", "Transunion", "J.P. Morgan", "Experian", "Citibank", "Bank of America")) +
   theme_fivethirtyeight()
 
 
@@ -104,7 +105,7 @@ ggplot(top_states, aes(state)) +
 Column {data-width=650}
 -----------------------------------------------------------------------
 
-### Sort by company.
+### The below chart shows the data sorted by company to see which financial institutions recieved the most customer complaints. 
 
 ```{r}
 
@@ -116,6 +117,7 @@ ggplot(top_companies, aes(company)) +
   labs(title = "Companies With Most Complaints", 
        subtitle = "Financial Protection Bureau 2022",
        caption = "Source: Consumer Complaint Database") +
+  scale_x_discrete(labels=c("Wells Fargo", "Transunion", "J.P. Morgan", "Experian", "Citibank", "Bank of America")) +
   theme_fivethirtyeight()
 
 ```
@@ -123,7 +125,7 @@ ggplot(top_companies, aes(company)) +
 Column {data-width=350}
 -----------------------------------------------------------------------
 
-### Chart B
+### This chart shows how most of the complaints were filed. 
 
 ```{r}
 
@@ -139,7 +141,7 @@ top_method + geom_bar(color = "#9ebcda", fill = "#9ebcda") +
 
 ```
 
-### Chart C
+### Here, the data is sorted by state to see in which states the complaints were filed most frequently. 
 
 ```{r}
 

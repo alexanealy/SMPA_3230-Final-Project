@@ -56,7 +56,6 @@ top_states <- complaints %>%
 
 ```
 
-
 ```{r}
 
 ggplot(top_companies, aes(company)) +
@@ -71,7 +70,6 @@ ggplot(top_companies, aes(company)) +
   theme_fivethirtyeight()
 
 ```
-
 
 ```{r}
 

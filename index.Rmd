@@ -24,7 +24,7 @@ complaints <- readRDS("complaints.rds") %>%
 ```
 
 ## R Markdown
-```{r pressure, echo=FALSE}
+```{r pressure, echo = FALSE}
 
 #Sort for complaints by company. 
 
@@ -41,6 +41,11 @@ top_companies <- complaints %>%
                         "CITIBANK, N.A.")) %>% 
   arrange(desc(company))
 
+```
+
+
+```{r}
+
 ggplot(top_companies, aes(company)) +
   geom_bar(color = "#9ebcda", fill = "#9ebcda") +
   coord_flip() +
@@ -54,9 +59,8 @@ ggplot(top_companies, aes(company)) +
 
 ```
 
-```{r pressure, echo=FALSE}
 
-#Sort for complaints by type. 
+```{r}
 
 top_method <- ggplot(complaints, aes(submitted_via))
 top_method + geom_bar(color = "#9ebcda", fill = "#9ebcda") +
@@ -70,9 +74,7 @@ top_method + geom_bar(color = "#9ebcda", fill = "#9ebcda") +
 
 ```
 
-```{r pressure, echo=FALSE}
-
-#Sort for complaints by state. 
+```{r, echo = FALSE}
 
 complaints %>%
   count(state, sort = TRUE)
@@ -90,6 +92,10 @@ top_states <- complaints %>%
                       "OH")) %>% 
   arrange(desc(company))
 
+```
+
+```{r}
+
 ggplot(top_states, aes(state)) +
   geom_bar(color = "#9ebcda", fill = "#9ebcda") +
   scale_y_continuous(name = "Number of Complaints", labels = scales::comma) +
@@ -100,4 +106,3 @@ ggplot(top_states, aes(state)) +
   theme_fivethirtyeight()
 
 ```
-

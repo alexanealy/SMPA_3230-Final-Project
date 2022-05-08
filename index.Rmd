@@ -21,11 +21,6 @@ library(dplyr)
 complaints <- readRDS("complaints.rds") %>%
   clean_names()
 
-```
-
-## R Markdown
-```{r pressure, echo = FALSE}
-
 #Sort for complaints by company. 
 
 complaints %>%
@@ -40,6 +35,24 @@ top_companies <- complaints %>%
                         "JPMORGAN CHASE & CO.", 
                         "CITIBANK, N.A.")) %>% 
   arrange(desc(company))
+
+complaints %>%
+  count(state, sort = TRUE)
+
+top_states <- complaints %>% 
+  filter(state %in% c("CA", 
+                      "FL", 
+                      "TX", 
+                      "NY", 
+                      "GA", 
+                      "PA", 
+                      "IL", 
+                      "NJ",
+                      "NC",
+                      "OH")) %>% 
+  arrange(desc(company))
+
+
 
 ```
 
@@ -71,26 +84,6 @@ top_method + geom_bar(color = "#9ebcda", fill = "#9ebcda") +
        subtitle = "Financial Protection Bureau 2022",
        caption = "Source: Consumer Complaint Database") +
   theme_fivethirtyeight()
-
-```
-
-```{r, echo = FALSE}
-
-complaints %>%
-  count(state, sort = TRUE)
-
-top_states <- complaints %>% 
-  filter(state %in% c("CA", 
-                      "FL", 
-                      "TX", 
-                      "NY", 
-                      "GA", 
-                      "PA", 
-                      "IL", 
-                      "NJ",
-                      "NC",
-                      "OH")) %>% 
-  arrange(desc(company))
 
 ```
 

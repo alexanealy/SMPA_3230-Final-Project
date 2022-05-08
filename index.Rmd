@@ -1,5 +1,5 @@
 ---
-title: "Complaints_Flexdashboard"
+title: "Analysis of Consumer Financial Protection Bureau complaints from March-December 2020"
 output: 
   flexdashboard::flex_dashboard:
     orientation: columns
@@ -102,10 +102,9 @@ ggplot(top_states, aes(state)) +
 
 ```
 
-Column {data-width=650}
------------------------------------------------------------------------
+## Column {data-width="650"}
 
-### The below chart shows the data sorted by company to see which financial institutions recieved the most customer complaints. 
+### The below chart shows the data sorted by company to see which financial institutions received the most customer complaints.
 
 ```{r, echo = FALSE}
 
@@ -122,10 +121,9 @@ ggplot(top_companies, aes(company)) +
 
 ```
 
-Column {data-width=350}
------------------------------------------------------------------------
+## Column {data-width="350"}
 
-### This chart shows how most of the complaints were filed. 
+### This chart shows how most of the complaints were filed.
 
 ```{r, echo = FALSE}
 
@@ -141,7 +139,7 @@ top_method + geom_bar(color = "#9ebcda", fill = "#9ebcda") +
 
 ```
 
-### Here, the data is sorted by state to see in which states the complaints were filed most frequently. 
+### Here, the data is sorted by state to see in which states the complaints were filed most frequently.
 
 ```{r, echo = FALSE}
 
@@ -155,4 +153,3 @@ ggplot(top_states, aes(state)) +
   theme_fivethirtyeight()
 
 ```
-

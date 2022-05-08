@@ -150,13 +150,11 @@ top_method + geom_bar(color = "#9ebcda", fill = "#9ebcda") +
 
 ## Column 2
 
+These charts show the frequency of customer complaints across financial institutions from March to December of 2020. For general information, the top 6 companies which received the most complaints are displayed. This tells us more generally which companies were most affected by COVID: either internally which caused the external complaints, or originating with consumer struggles and thereby affecting the company. This is where more investigation into qualitative data is needed to verify the narrative.
 
-These charts show the frequency of customer complaints across financial institutions from March to December of 2020. For general information, the top 6 companies which received the most complaints are displayed. This tells us more generally which companies were most affected by COVID: either internally which caused the external complaints, or originating with consumer struggles and thereby affecting the company. This is where more investigation into qualitative data is needed to verify the narrative. 
-
-The states with the most complaints have also been shown. While the results likely indicate simply more populous states of the U.S., this data could also be compared to overall population proportions to see which places are more financially affected by the COVID-19 pandemic. 
+The states with the most complaints have also been shown. While the results likely indicate simply more populous states of the U.S., this data could also be compared to overall population proportions to see which places are more financially affected by the COVID-19 pandemic.
 
 Lastly, the method of complaint is useful in determining just how many lines of communication were operated at the time. This would be interesting data to stack up against employment data: the need for telecom customer service representatives, for example.
-
 
 ### Here, the data is sorted by state to see in which states the complaints were filed most frequently.
 
@@ -172,4 +170,3 @@ ggplot(top_states, aes(state)) +
   theme_fivethirtyeight()
 
 ```
-

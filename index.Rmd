@@ -107,7 +107,7 @@ Column {data-width=650}
 
 ### The below chart shows the data sorted by company to see which financial institutions recieved the most customer complaints. 
 
-```{r}
+```{r, echo = FALSE}
 
 ggplot(top_companies, aes(company)) +
   geom_bar(color = "#9ebcda", fill = "#9ebcda") +
@@ -127,7 +127,7 @@ Column {data-width=350}
 
 ### This chart shows how most of the complaints were filed. 
 
-```{r}
+```{r, echo = FALSE}
 
 top_method <- ggplot(complaints, aes(submitted_via))
 top_method + geom_bar(color = "#9ebcda", fill = "#9ebcda") +
@@ -143,7 +143,7 @@ top_method + geom_bar(color = "#9ebcda", fill = "#9ebcda") +
 
 ### Here, the data is sorted by state to see in which states the complaints were filed most frequently. 
 
-```{r}
+```{r, echo = FALSE}
 
 ggplot(top_states, aes(state)) +
   geom_bar(color = "#9ebcda", fill = "#9ebcda") +

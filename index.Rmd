@@ -1,5 +1,5 @@
 ---
-title: "Complaints_Analysis"
+title: "Analysis of Consumer Financial Protection Bureau complaints from March-December 2020"
 author: "Alexa Nealy"
 date: "`r Sys.Date()`"
 output: html_document
